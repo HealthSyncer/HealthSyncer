@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        .settings-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .settings-icon img {
+            width: 30px;
+        }
+
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .settings-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .settings-menu a:hover {
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        section {
+            margin: 20px;
+        }
+
+        #dataLogging {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logging-buttons {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .logging-buttons button {
+            width: 45%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logging-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        #trends {
+            margin-top: 40px;
+        }
+
+        .graph-placeholder {
+            height: 200px;
+            background-color: #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .recommendations-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .recommendation-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="settings-icon">
+            <img src="https://w7.pngwing.com/pngs/257/93/png-transparent-settings-gear-icon-gear-configuration-set-up-thumbnail.png" alt="Settings" onclick="toggleSettingsMenu()">
+            <div id="settingsMenu" class="settings-menu">
+                <a href="account-details.html">Update Account Details</a>
+                <a href="account-settings.html">Account Settings</a>
+                <a href="logout.html">Log Out</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Welcome [name]!</h1>
+
+        <section id="dataLogging">
+            <h2>Data Logging</h2>
+            <div class="logging-buttons">
+                <button onclick="window.location.href='#'">Food Intake Input</button>
+                <button onclick="window.location.href='#'">Water Intake Input</button>
+                <button onclick="window.location.href='#'">Weight/Height Update</button>
+                <button onclick="window.location.href='#'">Heart Rate Input</button>
+            </div>
+        </section>
+
+        <section id="trends">
+            <h2>Trends</h2>
+            <div class="graph-placeholder">[Graph showing Daily/Weekly/Monthly Trends]</div>
+        </section>
+
+        <section id="recommendations">
+            <h2>Recommendations</h2>
+            <div class="recommendations-section">
+                <div class="recommendation-box">
+                    <h3>Exercise</h3>
+                    <p>Input: Calorie Intake, Health Complications, Water Intake</p>
+                    <p>Output: Recommended Steps/Exercises</p>
+                </div>
+                <div class="recommendation-box">
+                    <h3>Dietary Adjustments</h3>
+                    <p>Input: Food Intake, Heart Rate Data, Salt Intake</p>
+                    <p>Output: Recommendations on Salt Intake, Food Adjustments</p>
+                </div>
+                <div class="recommendation-box">
+                    <h3>Hydration</h3>
+                    <p>Input: Water Intake</p>
+                    <p>Output: Recommended Water Consumption</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleSettingsMenu() {
+            const menu = document.getElementById('settingsMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Close the menu if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.settings-icon img')) {
+                const menu = document.getElementById('settingsMenu');
+                if (menu.style.display === 'block') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

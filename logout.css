@@ -1,0 +1,103 @@
+/* General Page Styling */
+html, body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(120deg, #fa0000, #ff7300, #fbff00, #00ff04, #00b3ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Container Styling */
+#logout_container {
+  width: 100%;
+  max-width: 500px; /* Slightly wider for better spacing */
+  margin: 0 20px;
+}
+
+/* Content Box Styling */
+#logout_content {
+  background-color: #007a14;
+  padding: 50px 40px; /* Balanced padding for better layout */
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Softer shadow for a cleaner look */
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Smooth Fade-in Effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* Slight slide-up effect */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading Styling */
+p {
+  color: #ffffff;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-family: 'Bowlby One SC', cursive;
+  font-size: 26px; /* Slightly larger heading for prominence */
+  background: linear-gradient(120deg, #fa0000, #ff7300, #fbff00, #00ff04, #00b3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Disclaimer List Styling */
+ul {
+  color: #ffffff;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+ul li {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 14px;
+  font-size: 17px; /* Slightly larger text */
+  font-weight: bold;
+  background: linear-gradient(80deg, #fa0000, #ff7300, #fbff00, #00ff04, #00b3ff);
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Link Styling */
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #fcfcfc;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login + Firebase Database</title>
+         <!-- Cool Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+        <!-- Our stylesheet -->
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+      <div id="content_container">
+          <div id="form_container">
+              <div id="form_header_container">
+                  <h2 id="form_header"> Login / Sign Up </h2>
+              </div>
+
+              <div id="form_content_container">
+                  <div id="form_content_inner_container">
+                      <!-- Login & Signup Form -->
+                      <input type="text" id="first_name" placeholder="First name" class="signup-only" style="display: none;">
+                      <input type="text" id="last_name" placeholder="Last name" class="signup-only" style="display: none;">
+                      <input type="email" id="email" placeholder="Email">
+                      <input type="password" id="password" placeholder="Password">
+                      <input type="text" id="date_of_birth" placeholder="Date of Birth (MM/DD/YYYY)" class="signup-only" style="display: none;">
+
+                      <div id="button_container">
+                          <button onclick="login()" id="login_button">Login</button>
+                          <button onclick="register()" id="register_button" class="signup-only" style="display: none;">Register</button>
+                          <button id="sign_up_button" onclick="showSignup()">Sign Up Now</button>
+                          <button id="already_have_account_button" onclick="showLogin()" class="signup-only" style="display: none;">Already have an account?</button>
+                          <a href="#" id="forgot-password-link" style="color: white; display: none;">Click here to Reset Password!</a>
+                          <a href="#" id="forgot-password" style="color: white;">Forgot Password?</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <!-- Our script must be loaded after firebase references -->
+    <script src="index.js"></script>
+    <script>
+      function showSignup() {
+          // Hide login elements
+          document.getElementById('login_button').style.display = 'none';
+          document.getElementById('sign_up_button').style.display = 'none';
+
+          // Show signup elements
+          document.querySelectorAll('.signup-only').forEach(el => el.style.display = 'block');
+      }
+
+      function showLogin() {
+          // Hide signup elements
+          document.querySelectorAll('.signup-only').forEach(el => el.style.display = 'none');
+
+          // Show login elements
+          document.getElementById('login_button').style.display = 'block';
+          document.getElementById('sign_up_button').style.display = 'block';
+      }
+        // Add event listener for the "Forgot Password?" link
+        document.getElementById('forgot-password').addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent default link behavior
+
+          // Hide the password input field and the "Forgot Password?" link
+          document.getElementById('password').style.display = 'none';
+          document.getElementById('forgot-password').style.display = 'none';
+
+          // Hide the login and sign-up buttons
+          document.getElementById('login_button').style.display = 'none';
+          document.getElementById('sign_up_button').style.display = 'none';
+
+          // Show the "forgot-password-link" message
+          document.getElementById('forgot-password-link').style.display = 'block';
+        });
+
+
+
+
+
+
+        function resetToLoginState() {
+          // Hide the "forgot-password-link" message
+          document.getElementById('forgot-password-link').style.display = 'none';
+
+          // Show the password input field and the "Forgot Password?" link
+          document.getElementById('password').style.display = 'block';
+          document.getElementById('forgot-password').style.display = 'block';
+
+          // Show the login and sign-up buttons
+          document.getElementById('login_button').style.display = 'block';
+          document.getElementById('sign_up_button').style.display = 'block';
+        }
+
+        // Add event listener to handle the "OK" click after sending the reset email
+        document.getElementById('forgot-password-link').addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent default behavior
+
+          // After the user clicks "OK", reset the form to the original state
+          resetToLoginState();
+        });
+
+    </script>
+</html>
