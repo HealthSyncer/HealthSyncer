@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalization</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="personalization.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Personalize Your Fitness Dashboard</h1>
+        <form id="personalizationForm">
+            <label for="goal">What is your fitness goal?</label>
+            <select id="goal" name="goal">
+                <option value="weight-loss">Weight Loss</option>
+                <option value="muscle-gain">Muscle Gain</option>
+                <option value="endurance">Endurance</option>
+                <option value="flexibility">Flexibility</option>
+            </select>
+
+            <label for="experience">What is your fitness experience level?</label>
+            <select id="experience" name="experience">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+
+            <label for="availability">How many days per week can you work out?</label>
+            <select id="availability" name="availability">
+                <option value="1-2">1-2 days</option>
+                <option value="3-4">3-4 days</option>
+                <option value="5-6">5-6 days</option>
+                <option value="7">Every day</option>
+            </select>
+
+            <button type="submit">Save Preferences</button>
+        </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="personalization.js"></script>
+</body>
+</html>
