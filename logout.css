@@ -1,7 +1,7 @@
 /* General Page Styling */
 html, body {
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(120deg, #fa0000, #ff7300, #fbff00, #00ff04, #00b3ff);
+  background: linear-gradient(120deg, red, blue, pink, orange);
   display: flex;
   justify-content: center;
   align-items: center;

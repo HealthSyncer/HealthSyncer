@@ -26,7 +26,7 @@
                       <input type="text" id="last_name" placeholder="Last name" class="signup-only" style="display: none;">
                       <input type="email" id="email" placeholder="Email">
                       <input type="password" id="password" placeholder="Password">
-                      <input type="text" id="date_of_birth" placeholder="Date of Birth (MM/DD/YYYY)" class="signup-only" style="display: none;">
+                      <input type="text" id="date_of_birth" placeholder="Year of Birth (YYYY)" class="signup-only" style="display: none;">
 
                       <div id="button_container">
                           <button onclick="login()" id="login_button">Login</button>
@@ -109,6 +109,8 @@
 
           // After the user clicks "OK", reset the form to the original state
           resetToLoginState();
+            
+          document.getElementById('form_header').textContent = 'Forgot Password';
         });
 
     </script>
