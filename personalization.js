@@ -67,7 +67,7 @@
                     gender: gender,
                     weight: weight,
                     height: height,
-                    healthComplications: healthComplications
+                    healthComplications: selectedComplications
                 }, function (error) {
                     if (error) {
                         alert("Failed to save preferences. Please try again.");
