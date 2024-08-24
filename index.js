@@ -54,7 +54,7 @@ function register () {
     // Push to Firebase Database
     database_ref.child('users/' + user.uid).set(user_data)
 
-    // DOne
+    // Done
     alert('User Created!!')
   })
   .catch(function(error) {
@@ -95,7 +95,10 @@ function login () {
     // Push to Firebase Database
     database_ref.child('users/' + user.uid).update(user_data)
 
-    // DOne
+    // Store the user ID locally
+    localStorage.setItem('userId', user.uid);
+    
+    // Done
     alert('User Logged In!!')
     window.location.href = "home.html";
   })
@@ -173,5 +176,3 @@ function validate_email(email) {
   const expression = /^[^@]+@\w+(\.\w+)+\w$/;
   return expression.test(email);
 }
-
-// Your existing code for login, registration, etc. remains unchanged.
