@@ -36,6 +36,8 @@ auth.onAuthStateChanged(function(user) {
           });
         }
       }
+    }).catch(error => {
+      console.error('Error loading user data:', error);
     });
   } else {
     // No user is signed in
@@ -63,12 +65,15 @@ document.getElementById('personalizationForm').addEventListener('submit', functi
       height: document.getElementById('height').value,
       healthComplications: selectedComplications
     }).then(() => {
+      console.log('Preferences saved successfully!');
       alert('Preferences saved successfully!');
       window.location.href = "home.html"; // Redirect to home.html after saving
     }).catch(error => {
+      console.error('Error updating preferences:', error);
       alert('Error: ' + error.message);
     });
   } else {
+    console.error('No user is signed in.');
     alert('No user is signed in.');
     window.location.href = "index.html";
   }
