@@ -15,57 +15,97 @@
     <div class="container">
         <h1>Personalize Your Fitness Dashboard</h1>
         <form id="personalizationForm">
-            <label for="goal">What is your fitness goal?</label>
-            <select id="goal" name="goal">
-                <option value="weight-loss">Weight Loss</option>
-                <option value="muscle-gain">Muscle Gain</option>
-                <option value="endurance">Endurance</option>
-                <option value="flexibility">Flexibility</option>
+            <label for="age">What is your age? (Has to be 13+)</label>
+            <select id="age" name="age">
+                <option value="13-20">13-20</option>
+                <option value="20-30">20-30</option>
+                <option value="30-40">30-40</option>
+                <option value="40-50">40-50</option>
+                <option value="50-60">50-60</option>
+                <option value="60+">60+</option>
             </select>
 
-            <label for="experience">What is your fitness experience level?</label>
-            <select id="experience" name="experience">
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
+            <label for="gender">What is your gender?</label>
+            <select id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="prefer-not">Prefer Not To Say</option>
             </select>
 
-            <label for="availability">How many days per week can you work out?</label>
-            <select id="availability" name="availability">
-                <option value="1-2">1-2 days</option>
-                <option value="3-4">3-4 days</option>
-                <option value="5-6">5-6 days</option>
-                <option value="7">Every day</option>
+            <label for="weight">What is your weight (in kilograms)?</label>
+            <input type="text" id="weight" name="weight">
+            
+            <label for="height">What is your height (in centimeters)?</label>
+            <input type="text" id="height" name="height">
+            
+            <label for="health-comp">What are your health complications? (Select all that apply)</label>
+            <select id="health-comp" name="health-comp" multiple>
+                <!-- Fitness-related complications -->
+                <option value="obesity">Obesity</option>
+                <option value="joint-pain">Joint Pain</option>
+                <option value="muscle-weakness">Muscle Weakness</option>
+                <option value="chronic-fatigue">Chronic Fatigue</option>
+                <option value="back-pain">Back Pain</option>
+                <option value="arthritis">Arthritis</option>
+                <option value="osteoporosis">Osteoporosis</option>
+
+                <!-- Food intake-related complications -->
+                <option value="diabetes">Diabetes</option>
+                <option value="high-blood-pressure">High Blood Pressure</option>
+                <option value="high-cholesterol">High Cholesterol</option>
+                <option value="eating-disorder">Eating Disorder</option>
+                <option value="food-allergies">Food Allergies</option>
+                <option value="celiac-disease">Celiac Disease</option>
+                <option value="irritable-bowel-syndrome">Irritable Bowel Syndrome (IBS)</option>
+                <option value="acid-reflux">Acid Reflux</option>
+                <option value="lactose-intolerance">Lactose Intolerance</option>
+                <option value="constipation">Constipation</option>
+                <option value="diarrhea">Diarrhea</option>
+
+                <!-- Water intake-related complications -->
+                <option value="dehydration">Dehydration</option>
+                <option value="electrolyte-imbalance">Electrolyte Imbalance</option>
+                <option value="kidney-stones">Kidney Stones</option>
+                <option value="water-retention">Water Retention</option>
+                <option value="frequent-urination">Frequent Urination</option>
+                <option value="urinary-tract-infections">Urinary Tract Infections (UTIs)</option>
+
+                <!-- Heart rate-related complications -->
+                <option value="arrhythmia">Arrhythmia</option>
+                <option value="high-heart-rate">High Heart Rate</option>
+                <option value="low-heart-rate">Low Heart Rate</option>
+                <option value="palpitations">Palpitations</option>
+                <option value="hypertension">Hypertension</option>
+                <option value="hypotension">Hypotension</option>
+                <option value="angina">Angina</option>
+                <option value="coronary-artery-disease">Coronary Artery Disease</option>
             </select>
 
             <button type="submit">Save Preferences</button>
         </form>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <script>
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCmENSjs-wTyV1DlBPdEgVBYnZLCGsb-Ds",
+        authDomain: "fitnessapp-ec7b6.firebaseapp.com",
+        projectId: "fitnessapp-ec7b6",
+        storageBucket: "fitnessapp-ec7b6.appspot.com",
+        messagingSenderId: "501872278608",
+        appId: "1:501872278608:web:2edd766fb14b1de60ae555"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+    </script>
+
     <script src="personalization.js"></script>
-    <!-- Include the Firebase libraries -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCmENSjs-wTyV1DlBPdEgVBYnZLCGsb-Ds",
-  authDomain: "fitnessapp-ec7b6.firebaseapp.com",
-  projectId: "fitnessapp-ec7b6",
-  storageBucket: "fitnessapp-ec7b6.appspot.com",
-  messagingSenderId: "501872278608",
-  appId: "1:501872278608:web:2edd766fb14b1de60ae555",
-};
-
-  // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-</script>
-
 </body>
 </html>
