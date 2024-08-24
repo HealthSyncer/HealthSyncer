@@ -64,6 +64,7 @@ document.getElementById('personalizationForm').addEventListener('submit', functi
       healthComplications: selectedComplications
     }).then(() => {
       alert('Preferences saved successfully!');
+      window.location.href = "home.html"; // Redirect to home.html after saving
     }).catch(error => {
       alert('Error: ' + error.message);
     });
