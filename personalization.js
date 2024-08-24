@@ -40,7 +40,8 @@ auth.onAuthStateChanged(function(user) {
       console.error('Error loading user data:', error);
     });
   } else {
-    // No user is signed in
+    // Done
+    alert('User Not Logged In.')
     window.location.href = "index.html";
   }
 });
@@ -65,9 +66,9 @@ document.getElementById('personalizationForm').addEventListener('submit', functi
       height: document.getElementById('height').value,
       healthComplications: selectedComplications
     }).then(() => {
-      // Show a confirm dialog to the user
-      if (confirm('Preferences saved successfully! Click OK to go to the home page.')) {
-        window.location.href = "home.html"; // Redirect to home.html if OK is clicked
+    // Done
+      alert('User Details Saved!!')
+      window.location.href = "home.html";
       }
     }).catch(error => {
       console.error('Error updating preferences:', error);
@@ -75,7 +76,7 @@ document.getElementById('personalizationForm').addEventListener('submit', functi
     });
   } else {
     console.error('No user is signed in.');
-    alert('No user is signed in.');
+    alert('User Not Logged In.')
     window.location.href = "index.html";
   }
 });
