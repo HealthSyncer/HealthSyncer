@@ -136,7 +136,7 @@
         <h1 id="welcomeMessage">Welcome!</h1>
 
         <section id="customDataLogging">
-            <!-- This section will dynamically load based on user preferences -->
+            <!-- Dynamic data logging buttons will load here based on user preferences -->
         </section>
 
         <section id="trends">
@@ -147,64 +147,39 @@
         <section id="recommendations">
             <h2>Recommendations</h2>
             <div class="recommendations-section">
-                <!-- Recommendations will also be dynamic based on user data -->
+                <!-- Dynamic recommendations will load here based on user data -->
             </div>
         </section>
     </main>
-    
+
     <script src="home.js"></script>
-    
+
     <script>
     function logout() {
-      firebase.auth().signOut().then(() => {
-        // Clear local storage
-        localStorage.removeItem('userId');
-        window.location.href = "index.html";
-      }).catch((error) => {
-        console.error("Error signing out:", error);
-      });
+        firebase.auth().signOut().then(() => {
+            // Clear local storage and redirect
+            localStorage.removeItem('userId');
+            window.location.href = "index.html";
+        }).catch((error) => {
+            console.error("Error signing out:", error);
+        });
     }
-    </script>
-    
-    <script>
-        // Example of loading dynamic content
-        function loadUserPreferences() {
-            const userData = JSON.parse(localStorage.getItem('userPreferences')) || {};
-            document.getElementById('welcomeMessage').innerText = Welcome ${userData.name || 'User'}!;
 
-            // Customize the Data Logging section based on preferences
-            const dataLoggingSection = document.getElementById('customDataLogging');
-            dataLoggingSection.innerHTML = ''; // Clear previous content
+    // Function to toggle the settings menu
+    function toggleSettingsMenu() {
+        const menu = document.getElementById('settingsMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
 
-            if (userData.trackHeartRate) {
-                dataLoggingSection.innerHTML += <button onclick="window.location.href='#'">Heart Rate Input</button>;
-            }
-            if (userData.trackFoodIntake) {
-                dataLoggingSection.innerHTML += <button onclick="window.location.href='#'">Food Intake Input</button>;
-            }
-            if (userData.trackWaterIntake) {
-                dataLoggingSection.innerHTML += <button onclick="window.location.href='#'">Water Intake Input</button>;
-            }
-            // Add more options dynamically based on preferences
-        }
-
-        function toggleSettingsMenu() {
+    // Close the settings menu if clicked outside
+    window.onclick = function(event) {
+        if (!event.target.matches('.settings-icon img')) {
             const menu = document.getElementById('settingsMenu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Close the menu if clicked outside
-        window.onclick = function(event) {
-            if (!event.target.matches('.settings-icon img')) {
-                const menu = document.getElementById('settingsMenu');
-                if (menu.style.display === 'block') {
-                    menu.style.display = 'none';
-                }
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
             }
         }
-
-        // Load preferences on page load
-        window.onload = loadUserPreferences;
+    }
     </script>
 </body>
 </html>
