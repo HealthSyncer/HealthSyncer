@@ -100,7 +100,7 @@ function login () {
     
     // Done
     alert('User Logged In!!')
-    window.location.href = "home.html";
+    window.location.href = "personalization.html";
   })
   .catch(function(error) {
     // Firebase will use this to alert of its errors
