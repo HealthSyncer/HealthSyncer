@@ -10,7 +10,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// Load the user’s information on the home page
 window.onload = function() {
   const userId = localStorage.getItem('userId');
 
@@ -20,15 +19,36 @@ window.onload = function() {
     userRef.once('value').then((snapshot) => {
       const userData = snapshot.val();
 
-      if (userData && userData.first_name) {
-        // Display the welcome message with the user's first name
-        document.getElementById('welcomeMessage').innerText = Welcome, ${userData.first_name}!;
+      if (userData) {
+        // Display welcome message
+        document.getElementById('welcomeMessage').innerText = `Welcome, ${userData.first_name}!`;
+
+        // Load user preferences and dynamically generate content
+        loadUserPreferences(userData.preferences);
       }
     }).catch((error) => {
       console.error("Error fetching user data:", error);
     });
   } else {
-    // If no user is found, redirect to the login page
+    // Redirect to login page if no user is logged in
     window.location.href = "index.html";
   }
 };
+
+// Function to dynamically load user preferences
+function loadUserPreferences(preferences) {
+  const dataLoggingSection = document.getElementById('customDataLogging');
+  dataLoggingSection.innerHTML = ''; // Clear previous content
+
+  // Add buttons based on preferences
+  if (preferences.trackHeartRate) {
+    dataLoggingSection.innerHTML += `<button onclick="window.location.href='#'">Heart Rate Input</button>`;
+  }
+  if (preferences.trackFoodIntake) {
+    dataLoggingSection.innerHTML += `<button onclick="window.location.href='#'">Food Intake Input</button>`;
+  }
+  if (preferences.trackWaterIntake) {
+    dataLoggingSection.innerHTML += `<button onclick="window.location.href='#'">Water Intake Input</button>`;
+  }
+  // Add more options dynamically based on user preferences
+}
