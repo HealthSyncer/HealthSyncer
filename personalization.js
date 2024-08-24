@@ -65,9 +65,10 @@ document.getElementById('personalizationForm').addEventListener('submit', functi
       height: document.getElementById('height').value,
       healthComplications: selectedComplications
     }).then(() => {
-      console.log('Preferences saved successfully!');
-      alert('Preferences saved successfully!');
-      window.location.href = "home.html"; // Redirect to home.html after saving
+      // Show a confirm dialog to the user
+      if (confirm('Preferences saved successfully! Click OK to go to the home page.')) {
+        window.location.href = "home.html"; // Redirect to home.html if OK is clicked
+      }
     }).catch(error => {
       console.error('Error updating preferences:', error);
       alert('Error: ' + error.message);
