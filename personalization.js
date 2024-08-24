@@ -1,30 +1,46 @@
-document.getElementById('personalizationForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+    const userId = "uniqueUserId"; // You can replace this with an actual unique user ID from your authentication system
 
-    // Get selected values
-    const goal = document.getElementById('goal').value;
-    const experience = document.getElementById('experience').value;
-    const availability = document.getElementById('availability').value;
+    // Reference to the user's preferences in Firebase
+    const userRef = firebase.database().ref('users/' + userId + '/preferences');
 
-    // Store preferences in localStorage
-    localStorage.setItem('fitnessGoal', goal);
-    localStorage.setItem('fitnessExperience', experience);
-    localStorage.setItem('workoutAvailability', availability);
+    // Preload saved preferences from Firebase
+    userRef.once('value').then((snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            if (data.fitnessGoal) {
+                document.getElementById('goal').value = data.fitnessGoal;
+            }
+            if (data.fitnessExperience) {
+                document.getElementById('experience').value = data.fitnessExperience;
+            }
+            if (data.workoutAvailability) {
+                document.getElementById('availability').value = data.workoutAvailability;
+            }
+        }
+    });
 
-    // Redirect to the dashboard or another relevant page
-    alert('Preferences saved! You can now view your personalized dashboard.');
-    window.location.href = 'home.html';
-});
+    document.getElementById('personalizationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
 
-// Preload saved preferences if available
-window.addEventListener('DOMContentLoaded', function () {
-    if (localStorage.getItem('fitnessGoal')) {
-        document.getElementById('goal').value = localStorage.getItem('fitnessGoal');
-    }
-    if (localStorage.getItem('fitnessExperience')) {
-        document.getElementById('experience').value = localStorage.getItem('fitnessExperience');
-    }
-    if (localStorage.getItem('workoutAvailability')) {
-        document.getElementById('availability').value = localStorage.getItem('workoutAvailability');
-    }
+        // Get selected values
+        const goal = document.getElementById('goal').value;
+        const experience = document.getElementById('experience').value;
+        const availability = document.getElementById('availability').value;
+
+        // Store preferences in Firebase
+        userRef.set({
+            fitnessGoal: goal,
+            fitnessExperience: experience,
+            workoutAvailability: availability
+        }, function (error) {
+            if (error) {
+                alert("Failed to save preferences. Please try again.");
+                console.error("Error storing data:", error);
+            } else {
+                alert('Preferences saved! You can now view your personalized dashboard.');
+                window.location.href = 'home.html';
+            }
+        });
+    });
 });
