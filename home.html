@@ -125,7 +125,6 @@
             <img src="settings-icon.png" alt="Settings" onclick="toggleSettingsMenu()">
             <div id="settingsMenu" class="settings-menu">
                 <a href="account-details.html">Update Account Details</a>
-                <a href="account-settings.html">Account Settings</a>
                 <a href="personalization.html">Personalize Dashboard</a>
                 <a href="logout.html" onclick="logout()">Log Out</a>
             </div>
@@ -133,10 +132,18 @@
     </header>
 
     <main>
-        <h1 id="welcomeMessage">Welcome!</h1>
+        <h1 id="welcomeMessage">Welcome, <span id="userFirstName">User</span>!</h1>
 
-        <section id="customDataLogging">
-            <!-- Dynamic data logging buttons will load here based on user preferences -->
+         <section id="customDataLogging">
+            <h2>Custom Data Logging</h2>
+            <div class="logging-buttons">
+                <button onclick="logData('food')">Log Food Intake</button>
+                <button onclick="logData('water')">Log Water Intake</button>
+                <button onclick="logData('bmi')">BMI</button>
+                <button onclick="startHeartRateTracking()">Track Heart Rate</button>
+            </div>
+             <div id="heartRateResult" style="text-align: center; margin-top: 20px;"></div>
+             <video id="cameraView" style="display: none;"></video>
         </section>
 
         <section id="trends">
