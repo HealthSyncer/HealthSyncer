@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rate Tracker</title>
+    <style>
+        #video {
+            display: none;
+        }
+        #canvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Heart Rate Tracker</h1>
+    <button id="startBtn">Start Heart Rate Tracking</button>
+    <video id="video" autoplay></video>
+    <canvas id="canvas"></canvas>
+    <p id="heartRate">Heart Rate: <span id="rate">--</span> BPM</p>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const heartRateDisplay = document.getElementById('rate');
+        let tracking = false;
+
+        // Start tracking when the button is clicked
+        document.getElementById('startBtn').addEventListener('click', function() {
+            if (!tracking) {
+                startTracking();
+            }
+        });
+
+        function startTracking() {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    tracking = true;
+                    trackHeartRate();
+                })
+                .catch(function(err) {
+                    console.error('Error accessing camera: ' + err);
+                });
+        }
+
+        function trackHeartRate() {
+            setInterval(function() {
+                if (!tracking) return;
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Get the average red color from the camera image (simplified)
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let sum = 0;
+                for (let i = 0; i < imageData.data.length; i += 4) {
+                    sum += imageData.data[i]; // Red channel
+                }
+                const averageRed = sum / (imageData.data.length / 4);
+
+                // Simple example of heart rate calculation (for demonstration only)
+                const bpm = calculateHeartRate(averageRed);
+                heartRateDisplay.textContent = bpm;
+            }, 100); // Adjust the interval based on your needs
+        }
+
+        function calculateHeartRate(redValue) {
+            // Placeholder logic for heart rate calculation
+            // In reality, you'd need more complex signal processing to get the real BPM
+            return Math.floor(60 + (redValue % 20)); // Example logic
+        }
+    </script>
+</body>
+</html>
