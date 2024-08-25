@@ -5,73 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Rate Tracker</title>
     <style>
-        #video {
-            display: none;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-        #canvas {
-            display: none;
+
+        #widget-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #heartRateTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #heartRateTable th, #heartRateTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #heartRateTable th {
+            background-color: #f4f4f4;
         }
     </style>
 </head>
 <body>
     <h1>Heart Rate Tracker</h1>
-    <button id="startBtn">Start Heart Rate Tracking</button>
-    <video id="video" autoplay></video>
-    <canvas id="canvas"></canvas>
-    <p id="heartRate">Heart Rate: <span id="rate">--</span> BPM</p>
+
+    <div id="widget-container">
+        <!-- Pulsoid Widget Embed -->
+        <iframe src="https://pulsoid.net/widget/view/ef535036-5aa2-4742-adad-93ea9b1b0a91"
+                width="320" height="240" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Table for Heart Rate Data -->
+    <table id="heartRateTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Heart Rate (BPM)</th>
+            </tr>
+        </thead>
+        <tbody id="heartRateData">
+            <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
 
     <script>
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const heartRateDisplay = document.getElementById('rate');
-        let tracking = false;
+        // Simulate fetching heart rate data (replace this with real data retrieval logic)
+        function fetchHeartRateData() {
+            // Example data, replace with actual logic
+            const heartRate = Math.floor(Math.random() * 100) + 60; // Random BPM
+            const now = new Date();
+            const dateString = now.toLocaleDateString();
 
-        // Start tracking when the button is clicked
-        document.getElementById('startBtn').addEventListener('click', function() {
-            if (!tracking) {
-                startTracking();
-            }
-        });
-
-        function startTracking() {
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    tracking = true;
-                    trackHeartRate();
-                })
-                .catch(function(err) {
-                    console.error('Error accessing camera: ' + err);
-                });
+            // Append data to the table
+            const tableBody = document.getElementById('heartRateData');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${dateString}</td>
+                <td>${heartRate}</td>
+            `;
+            tableBody.appendChild(newRow);
         }
 
-        function trackHeartRate() {
-            setInterval(function() {
-                if (!tracking) return;
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                
-                // Get the average red color from the camera image (simplified)
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                let sum = 0;
-                for (let i = 0; i < imageData.data.length; i += 4) {
-                    sum += imageData.data[i]; // Red channel
-                }
-                const averageRed = sum / (imageData.data.length / 4);
-
-                // Simple example of heart rate calculation (for demonstration only)
-                const bpm = calculateHeartRate(averageRed);
-                heartRateDisplay.textContent = bpm;
-            }, 100); // Adjust the interval based on your needs
-        }
-
-        function calculateHeartRate(redValue) {
-            // Placeholder logic for heart rate calculation
-            // In reality, you'd need more complex signal processing to get the real BPM
-            return Math.floor(60 + (redValue % 20)); // Example logic
-        }
+        // Fetch heart rate data periodically (e.g., every minute)
+        setInterval(fetchHeartRateData, 60000); // 60000 ms = 1 minute
     </script>
 </body>
 </html>
