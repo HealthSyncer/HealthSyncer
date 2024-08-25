@@ -40,7 +40,7 @@ select {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: linear-gradient(45deg, red, orange, yellow, green, blue, purple);
   color: white;
   font-size: 18px;
   border: none;
