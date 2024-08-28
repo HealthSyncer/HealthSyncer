@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta nme="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Intake Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Water Intake Tracker</h1>
+    <form id="waterForm">
+      <label for="glasses">Enter glasses of water:</label>
+      <input type="number" id="glasses" name="glasses" min="1" required>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="output"></p>
+    <canvas id="waterChart" width="400" height="200"></canvas>
+    <script>
+      const form=document.getElementById('waterForm');
+      const output=document.getElementById('output');
+      const ctx=document.getElementById('waterChart').getContext('2d');
+
+      let dailyIntake=[];
+      let labels=[];
+
+      function updateGraph(glasses) {
+        const ounces = glasses * 8; 
+        const walkingMinutes = (ounces/12)*30;
+        output.textContent = 'You consumed ${ounces} ounces of water. You need approximately ${walkingMinutes.toFixed(2)} minutes of walking.'
+    </script>
+  </body>
+</html>
